@@ -1,0 +1,23 @@
+DO $$
+BEGIN
+    -- 检查表是否存在
+    IF EXISTS (SELECT 1 FROM pg_tables WHERE schemaname = 'mimiciv_derived' AND tablename = 'sepsis3') THEN
+        -- 添加注释
+        COMMENT ON COLUMN mimiciv_derived.sepsis3.subject_id IS '患者ID，标识每个患者的唯一标识符';
+        COMMENT ON COLUMN mimiciv_derived.sepsis3.stay_id IS '住院ID，标识每次住院的唯一标识符';
+        COMMENT ON COLUMN mimiciv_derived.sepsis3.antibiotic_time IS '抗生素使用时间，记录患者开始使用抗生素的时间';
+        COMMENT ON COLUMN mimiciv_derived.sepsis3.culture_time IS '培养时间，记录进行微生物培养的时间';
+        COMMENT ON COLUMN mimiciv_derived.sepsis3.suspected_infection_time IS '疑似感染时间，记录医务人员怀疑感染的时间';
+        COMMENT ON COLUMN mimiciv_derived.sepsis3.sofa_time IS 'SOFA评分时间，记录计算SOFA评分的具体时间';
+        COMMENT ON COLUMN mimiciv_derived.sepsis3.sofa_score IS 'SOFA评分，表示患者的SOFA评分，用于评估器官功能障碍';
+        COMMENT ON COLUMN mimiciv_derived.sepsis3.respiration IS '呼吸系统评分，SOFA评分中关于呼吸系统的评分';
+        COMMENT ON COLUMN mimiciv_derived.sepsis3.coagulation IS '凝血系统评分，SOFA评分中关于凝血系统的评分';
+        COMMENT ON COLUMN mimiciv_derived.sepsis3.liver IS '肝脏评分，SOFA评分中关于肝脏功能的评分';
+        COMMENT ON COLUMN mimiciv_derived.sepsis3.cardiovascular IS '心血管评分，SOFA评分中关于心血管系统的评分';
+        COMMENT ON COLUMN mimiciv_derived.sepsis3.cns IS '中枢神经系统评分，SOFA评分中关于神经系统的评分';
+        COMMENT ON COLUMN mimiciv_derived.sepsis3.renal IS '肾脏评分，SOFA评分中关于肾脏功能的评分';
+        COMMENT ON COLUMN mimiciv_derived.sepsis3.sepsis3 IS '是否符合SEPSIS-3标准，布尔值表示患者是否被诊断为脓毒症（真/假）';
+
+    
+    END IF;
+END $$;
